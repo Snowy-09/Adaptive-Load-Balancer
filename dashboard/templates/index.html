@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NetPilot | SDN Load Balancer</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/script.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>◈ NetPilot</h2>
+    <p class="muted">SDN CONTROL PLANE</p>
+    <a href="#overview">▦ &nbsp; Overview</a>
+    <a href="#backends">◈ &nbsp; Backend servers</a>
+    <a href="#comparison">⇄ &nbsp; Comparison</a>
+    <div class="sidebar-bottom">● Local Mininet lab</div>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">NETWORK OPERATIONS / DASHBOARD</p>
+        <h1>Load balancer overview</h1>
+        <p class="muted">Monitor backend health and experiment with routing behavior.</p>
+      </div>
+      <span class="pill" id="connection">Connecting...</span>
+    </header>
+
+    <section id="overview">
+      <h2>Performance snapshot</h2>
+      <p class="muted">Latest benchmark results</p>
+      <div class="metrics">
+        <article><span>Throughput</span><strong><b id="throughput">—</b> <small>req/s</small></strong></article>
+        <article><span>Average latency</span><strong><b id="latency">—</b> <small>ms</small></strong></article>
+        <article><span>P95 latency</span><strong><b id="p95">—</b> <small>ms</small></strong></article>
+        <article><span>Success rate</span><strong><b id="success">—</b> <small>%</small></strong></article>
+      </div>
+      <p class="muted" id="updated">Waiting for metrics...</p>
+    </section>
+
+    <section id="backends">
+      <h2>Backend servers</h2>
+      <p class="muted">Adjust artificial processing delay for each backend.</p>
+      <div class="servers">
+        <article class="server">
+          <div class="server-title"><h3>Server S1</h3><span id="status-S1" class="status">UNKNOWN</span></div>
+          <p class="muted">10.0.0.4 · TCP 5001</p>
+          <div class="stats">
+            <div>Active connections<strong id="active-S1">—</strong></div>
+            <div>Avg processing<strong><span id="processing-S1">—</span> ms</strong></div>
+            <div>CPU usage<strong><span id="cpu-S1">—</span>%</strong></div>
+          </div>
+          <label for="delay-S1">Artificial delay <strong><span id="value-S1">100</span> ms</strong></label>
+          <input id="delay-S1" type="range" min="0" max="1000" step="25" value="100">
+        </article>
+
+        <article class="server">
+          <div class="server-title"><h3>Server S2</h3><span id="status-S2" class="status">UNKNOWN</span></div>
+          <p class="muted">10.0.0.5 · TCP 5002</p>
+          <div class="stats">
+            <div>Active connections<strong id="active-S2">—</strong></div>
+            <div>Avg processing<strong><span id="processing-S2">—</span> ms</strong></div>
+            <div>CPU usage<strong><span id="cpu-S2">—</span>%</strong></div>
+          </div>
+          <label for="delay-S2">Artificial delay <strong><span id="value-S2">100</span> ms</strong></label>
+          <input id="delay-S2" type="range" min="0" max="1000" step="25" value="100">
+        </article>
+
+        <article class="server">
+          <div class="server-title"><h3>Server S3</h3><span id="status-S3" class="status">UNKNOWN</span></div>
+          <p class="muted">10.0.0.6 · TCP 5003</p>
+          <div class="stats">
+            <div>Active connections<strong id="active-S3">—</strong></div>
+            <div>Avg processing<strong><span id="processing-S3">—</span> ms</strong></div>
+            <div>CPU usage<strong><span id="cpu-S3">—</span>%</strong></div>
+          </div>
+          <label for="delay-S3">Artificial delay <strong><span id="value-S3">100</span> ms</strong></label>
+          <input id="delay-S3" type="range" min="0" max="1000" step="25" value="100">
+        </article>
+      </div>
+
+      <div class="actions">
+        <button class="secondary" id="reset">Reset defaults</button>
+        <button id="apply">Apply delays</button>
+      </div>
+      <p id="delay-message" class="notice">Delay settings are not yet connected to the running servers.</p>
+    </section>
+
+
+    <section id="controller-controls">
+      <h2>Load balancer controls</h2>
+      <p class="muted">Choose the routing strategy and run a benchmark through Mininet.</p>
+      <div class="comparison">
+        <article>
+          <h3>Routing strategy</h3>
+          <div class="actions">
+            <button class="secondary" id="mode-static">Static round-robin</button>
+            <button id="mode-adaptive">Adaptive</button>
+          </div>
+          <p id="controller-message" class="notice">Controller status not yet checked.</p>
+        </article>
+        <article>
+          <h3>Benchmark</h3>
+          <label for="request-count">Requests per client: <strong><span id="request-count-value">200</span></strong></label>
+          <input id="request-count" type="range" min="10" max="500" step="10" value="200">
+          <label for="worker-count">Workers per client: <strong><span id="worker-count-value">10</span></strong></label>
+          <input id="worker-count" type="range" min="1" max="50" step="1" value="10">
+          <div class="actions">
+            <button id="run-benchmark">Run benchmark</button>
+          </div>
+          <p id="benchmark-message" class="notice">Waiting for benchmark.</p>
+          <p>Requests succeeded: <strong id="bench-success">—</strong></p>
+          <p>Requests failed: <strong id="bench-failed">—</strong></p>
+          <p>Backend distribution: <strong id="bench-distribution">—</strong></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <h2>Algorithm comparison</h2>
+      <p class="muted">Record results from the same benchmark configuration.</p>
+      <div class="comparison">
+        <article>
+          <h3>Static round-robin</h3>
+          <p>Throughput: <strong id="static-throughput">—</strong> req/s</p>
+          <p>Average latency: <strong id="static-latency">—</strong> ms</p>
+          <p>Success rate: <strong id="static-success">—</strong></p>
+          <button class="secondary" id="save-static">Record static results</button>
+        </article>
+        <article>
+          <h3>Adaptive load balancer</h3>
+          <p>Throughput: <strong id="adaptive-throughput">—</strong> req/s</p>
+          <p>Average latency: <strong id="adaptive-latency">—</strong> ms</p>
+          <p>Success rate: <strong id="adaptive-success">—</strong></p>
+          <button class="secondary" id="save-adaptive">Record adaptive results</button>
+        </article>
+      </div>
+      <p class="notice">Each run sends the selected number of requests from each of h1, h2 and h3. Switch strategy, then repeat with identical settings.</p>
+    </section>
+    <footer>NetPilot SDN Lab · Experimental dashboard</footer>
+  </main>
+  <div id="toast" role="status"></div>
+</body>
+</html>

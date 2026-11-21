@@ -1,0 +1,100 @@
+===== DATE =====
+Tue Nov 17 08:36:08 PM IST 2026
+===== BACKEND PROCESSES =====
+root        5137    5024  0 19:51 pts/7    00:00:05 python3 -u /home/vishnu/cn-sdn-multiclient/server.py 5001 S1
+root        5144    5026  0 19:51 pts/8    00:00:04 python3 -u /home/vishnu/cn-sdn-multiclient/server.py 5002 S2
+root        5152    5028  0 19:51 pts/9    00:00:04 python3 -u /home/vishnu/cn-sdn-multiclient/server.py 5003 S3
+===== BACKEND METRICS =====
+--- Port 6001 ---
+
+--- Port 6002 ---
+
+--- Port 6003 ---
+
+===== BACKEND TCP CONNECTIONS =====
+===== AGENT LOGS =====
+--- runtime/agent-h1.log ---
+Benchmark agent ready on h1; waiting for jobs.
+h1: running benchmark fa4ea572217a4fe2983c745a49089ca7
+h1: benchmark fa4ea572217a4fe2983c745a49089ca7 cancelled.
+h1: running benchmark 1945fd1036ed472a843226b6c9bb8f55
+h1: 0/200 succeeded
+--- runtime/agent-h2.log ---
+Benchmark agent ready on h2; waiting for jobs.
+h2: running benchmark fa4ea572217a4fe2983c745a49089ca7
+h2: benchmark fa4ea572217a4fe2983c745a49089ca7 cancelled.
+h2: running benchmark 1945fd1036ed472a843226b6c9bb8f55
+h2: 0/200 succeeded
+--- runtime/agent-h3.log ---
+Benchmark agent ready on h3; waiting for jobs.
+h3: running benchmark fa4ea572217a4fe2983c745a49089ca7
+h3: benchmark fa4ea572217a4fe2983c745a49089ca7 cancelled.
+h3: running benchmark 1945fd1036ed472a843226b6c9bb8f55
+h3: 0/200 succeeded
+===== BENCHMARK RESULTS =====
+--- runtime/cn_sdn_benchmark_result_h1.json ---
+{
+  "run_id": "1945fd1036ed472a843226b6c9bb8f55",
+  "client_id": "h1",
+  "total": 200,
+  "workers": 30,
+  "successful": 0,
+  "failed": 200,
+  "elapsed_seconds": 84.2626,
+  "throughput": 0.0,
+  "started_at": 1794927270.3614793,
+  "latencies": [],
+  "distribution": {},
+  "errors": [
+    "timed out",
+    "timed out",
+    "timed out",
+    "timed out",
+    "timed out"
+  ],
+  "finished_at": 1794927354.6241431
+}
+--- runtime/cn_sdn_benchmark_result_h2.json ---
+{
+  "run_id": "1945fd1036ed472a843226b6c9bb8f55",
+  "client_id": "h2",
+  "total": 200,
+  "workers": 30,
+  "successful": 0,
+  "failed": 200,
+  "elapsed_seconds": 84.2405,
+  "throughput": 0.0,
+  "started_at": 1794927270.382351,
+  "latencies": [],
+  "distribution": {},
+  "errors": [
+    "timed out",
+    "timed out",
+    "timed out",
+    "timed out",
+    "timed out"
+  ],
+  "finished_at": 1794927354.6229587
+}
+--- runtime/cn_sdn_benchmark_result_h3.json ---
+{
+  "run_id": "1945fd1036ed472a843226b6c9bb8f55",
+  "client_id": "h3",
+  "total": 200,
+  "workers": 30,
+  "successful": 0,
+  "failed": 200,
+  "elapsed_seconds": 84.2794,
+  "throughput": 0.0,
+  "started_at": 1794927270.3354514,
+  "latencies": [],
+  "distribution": {},
+  "errors": [
+    "timed out",
+    "timed out",
+    "timed out",
+    "timed out",
+    "timed out"
+  ],
+  "finished_at": 1794927354.6150663
+}

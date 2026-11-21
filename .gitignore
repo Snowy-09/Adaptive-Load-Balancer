@@ -1,0 +1,22 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+osken-venv/
+
+# IDE
+.vscode/
+
+# Runtime-generated files
+runtime/*
+!runtime/.gitkeep
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
